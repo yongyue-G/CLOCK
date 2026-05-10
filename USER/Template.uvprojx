@@ -187,7 +187,7 @@
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
-            <useUlib>0</useUlib>
+            <useUlib>1</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
             <nSecure>0</nSecure>
@@ -336,7 +336,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F40_41xxx,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\CORE;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\USER;..\FWLIB\inc;..\FreeRTOS\include;..\FreeRTOS\port\RVDS\ARM_CM4F</IncludePath>
+              <IncludePath>..\CORE;..\SYSTEM\sys;..\SYSTEM\usart;..\USER;..\FWLIB\inc;..\FreeRTOS\include;..\FreeRTOS\port\RVDS\ARM_CM4F;D:\keil5\ARM\ARMCLANG\include;..\SYSTEM\timer;..\INC;..\USER;..\custom;..\generated;..\generated\guider_customer_fonts;..\generated\guider_fonts;..\generated\images;..\generated\MicroPython</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -596,29 +596,19 @@
           <GroupName>SYSTEM</GroupName>
           <Files>
             <File>
-              <FileName>delay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\delay\delay.c</FilePath>
-            </File>
-            <File>
               <FileName>sys.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\sys\sys.c</FilePath>
             </File>
             <File>
-              <FileName>usart.c</FileName>
+              <FileName>wifi_usart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\usart\usart.c</FilePath>
+              <FilePath>..\SYSTEM\usart\wifi_usart.c</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>README</GroupName>
-          <Files>
             <File>
-              <FileName>readme.txt</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\readme.txt</FilePath>
+              <FileName>timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\timer\timer.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -674,6 +664,101 @@
               <FileName>timers.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\FreeRTOS\src\timers.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>BSP</GroupName>
+          <Files>
+            <File>
+              <FileName>log.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\log.c</FilePath>
+            </File>
+            <File>
+              <FileName>LCD.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\LCD.c</FilePath>
+            </File>
+            <File>
+              <FileName>SPI.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\SPI.c</FilePath>
+            </File>
+            <File>
+              <FileName>LCD_GUI.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\LCD_GUI.c</FilePath>
+            </File>
+            <File>
+              <FileName>HomePage.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\HomePage.c</FilePath>
+            </File>
+            <File>
+              <FileName>Init_Page.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\Init_Page.c</FilePath>
+            </File>
+            <File>
+              <FileName>DHT11.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\DHT11.c</FilePath>
+            </File>
+            <File>
+              <FileName>AT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\AT.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>INC</GroupName>
+          <Files>
+            <File>
+              <FileName>log.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\INC\log.h</FilePath>
+            </File>
+            <File>
+              <FileName>LCD.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\INC\LCD.h</FilePath>
+            </File>
+            <File>
+              <FileName>SPI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\INC\SPI.h</FilePath>
+            </File>
+            <File>
+              <FileName>LCD_GUI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\INC\LCD_GUI.h</FilePath>
+            </File>
+            <File>
+              <FileName>FONT.H</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\INC\FONT.H</FilePath>
+            </File>
+            <File>
+              <FileName>Init_Page.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\INC\Init_Page.h</FilePath>
+            </File>
+            <File>
+              <FileName>Homepage.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\INC\Homepage.h</FilePath>
+            </File>
+            <File>
+              <FileName>DHT11.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\INC\DHT11.h</FilePath>
+            </File>
+            <File>
+              <FileName>AT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\INC\AT.h</FilePath>
             </File>
           </Files>
         </Group>

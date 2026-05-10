@@ -38,9 +38,9 @@
 "..\obj\stm32f4xx_tim.o"
 "..\obj\stm32f4xx_usart.o"
 "..\obj\stm32f4xx_wwdg.o"
-"..\obj\delay.o"
 "..\obj\sys.o"
-"..\obj\usart.o"
+"..\obj\wifi_usart.o"
+"..\obj\timer.o"
 "..\obj\port.o"
 "..\obj\heap_4.o"
 "..\obj\croutine.o"
@@ -50,7 +50,15 @@
 "..\obj\stream_buffer.o"
 "..\obj\tasks.o"
 "..\obj\timers.o"
---strict --scatter "..\OBJ\Template.sct"
+"..\obj\log.o"
+"..\obj\lcd.o"
+"..\obj\spi.o"
+"..\obj\lcd_gui.o"
+"..\obj\homepage.o"
+"..\obj\init_page.o"
+"..\obj\dht11.o"
+"..\obj\at.o"
+--library_type=microlib --strict --scatter "..\OBJ\Template.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "..\OBJ\Template.map" -o ..\OBJ\Template.axf
