@@ -36,6 +36,7 @@
 ..\obj\at.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
 ..\obj\at.o: ..\INC\AT.h
 ..\obj\at.o: ..\USER\main.h
+..\obj\at.o: D:\keil5\ARM\ARMCLANG\include\string.h
 ..\obj\at.o: ..\INC\log.h
 ..\obj\at.o: D:\keil5\ARM\ARMCLANG\include\stdio.h
 ..\obj\at.o: ..\SYSTEM\timer\Timer.h
@@ -44,3 +45,4 @@
 ..\obj\at.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h
 ..\obj\at.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\at.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
+..\obj\at.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdlib.h

@@ -127,7 +127,7 @@
         #ifdef CONFIG_LV_MEM_SIZE
             #define LV_MEM_SIZE CONFIG_LV_MEM_SIZE
         #else
-            #define LV_MEM_SIZE (48U * 1024U)          /*[bytes]*/
+            #define LV_MEM_SIZE (12U * 1024U)          /*[bytes]*/
         #endif
     #endif
 

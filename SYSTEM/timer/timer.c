@@ -41,5 +41,6 @@ void TIM4_IRQHandler(void)
 	{
 		TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
 		ms_tick++;  // 每 1 ms 增加一次
+		lv_tick_inc(1);
 	}
 }

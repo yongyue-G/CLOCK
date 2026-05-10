@@ -6,6 +6,7 @@
 #include "wifi_usart.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 uint16_t at_rev_len=0;
 uint8_t at_rx_busy_flag=0;
 USART_Config AT_usartc;
@@ -185,12 +186,12 @@ WIFI_Status AT_WIFI_Info(char *ssid)
 
     if(p==NULL)
         return WIFI_Unknow;
-    char parsed[64];
-    if(sscanf(p,"CWSTATE:2,\"%63[^\"]\"",parsed)==1)//如果调用成功，则函数返回读入数据的个数；
+    char prased[64];
+    if(sscanf(p,"CWSTATE:2,\"%63[^\"]\"",prased)==1)//如果调用成功，则函数返回读入数据的个数；
     {  //strcmp比较两个字符串ASIIC，果返回值小于 0，则表示 str1 小于 str2。
-        if(ssid[0] =='\0'||strcmp(parsed,ssid)==0)//两种情况，传入为空和现在连接的与传入字符相同
+        if(ssid[0] =='\0'||strcmp(prased,ssid)==0)//两种情况，传入为空和现在连接的与传入字符相同
         {
-            strcpy(ssid,parsed);//用来处理传入为空的状况
+            strcpy(ssid,prased);//用来处理传入为空的状况
             return WIFI_Connected;
         }
     }
@@ -262,8 +263,9 @@ uint8_t AT_Get_Time(time_t* tm)
     //此处不需要数据解析就不用AT_Transceive，分布写
     AT_Send("AT+CIPSNTPTIME?");
     AT_Transceive(at_buff,AT_RECV_TIMEOUT);
-    if(parse_time(tm)==0) return 0;
+    if(prase_time(tm)==0) return 0;
     AT_Show_Time(tm);
+		return 1;
 }
 void AT_Show_Time(time_t* tm)
 {
@@ -300,16 +302,16 @@ uint8_t json_next_string(char **pp,const char*key,char*out,size_t out_len)//双重
     if(!p)
         return 0;
 
-    p=strstr(p,':');
+    p=strchr(p,':');
     if(!p)
         return 0;
 
-    p=strstr(p,'"');
+    p=strchr(p,'"');
     if(!p)
         return 0;
 
     p++;
-    char* end=strstr(p,'"');
+    char* end=strchr(p,'"');
     if(!end)
         return 0;
     size_t len=(size_t)(end-p);//强行转化
@@ -319,14 +321,14 @@ uint8_t json_next_string(char **pp,const char*key,char*out,size_t out_len)//双重
     memcpy(out,p,len);
     out[len]='\0';
 
-    **pp=end+1;
+    *pp=end+1;
 
     return 1;
 }
 uint8_t prase_weather(weather_info_t *info)
 {
     char* p=at_buff;
-    char* tem[64];
+    char tem[64];//不加星号
 
     if(!json_next_string(&p,"\"name\"",info->city,sizeof(info->city)))
         return 0;
@@ -339,7 +341,7 @@ uint8_t prase_weather(weather_info_t *info)
     if(!json_next_string(&p,"\"code\"",tem,sizeof(tem)))
         return 0;
 
-    info->weather=atof(tem);
+    info->weather=atof(tem);//用来把字符串变成浮点数
 
     if(!json_next_string(&p,"\"temperature\"",tem,sizeof(tem)))
         return 0;
@@ -362,7 +364,7 @@ uint8_t prase_time(time_t *t_tm)
     {
         return 0;
     }
-    p+=strlen(p, "+CIPSNTPTIME:");
+    p+=strlen("+CIPSNTPTIME:");
     //因为 day 是一个普通的 8 位数字变量（uint8_t）。要想让 sscanf 把吸出来的数据直接改写到结构体内部，必须加上 &
     if(scanf(p,"%15[^ ] %15[^ ] %hhd %hhd:%hhd:%hhd %hd",week,mon,
         &t_tm->day, &t_tm->hour, &t_tm->min, &t_tm->sec,&t_tm->year) != 7)//（hhd 是专门给 8 位整数 uint8_t 用的）,[^ ]：一直往后吸，直到遇到空格为止！

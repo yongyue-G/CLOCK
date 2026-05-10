@@ -1,7 +1,7 @@
 #ifndef __AT_H
 #define __AT_H
 #include "main.h"
-
+#include"string.h"
 
 #define AT_BUFF_SIZE 512
 #define AT_INIT_TIMEOUT 3000
