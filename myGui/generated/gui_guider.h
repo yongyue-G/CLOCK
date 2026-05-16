@@ -18,21 +18,27 @@ extern "C" {
 typedef struct
 {
   
-	lv_obj_t *screen;
-	bool screen_del;
-	lv_obj_t *screen_city;
-	lv_obj_t *screen_indoor;
-	lv_obj_t *screen_shidu;
-	lv_obj_t *screen_outdoor;
-	lv_obj_t *screen_tianqi;
-	lv_obj_t *screen_qianqi_show;
-	lv_obj_t *screen_shidu_show;
-	lv_obj_t *screen_city_show;
-	lv_obj_t *screen_indoor_show;
-	lv_obj_t *screen_outdoor_show;
-	lv_obj_t *screen_cont_1;
-	lv_obj_t *screen_time;
-	lv_obj_t *screen_date;
+	lv_obj_t *screen_init;
+	bool screen_init_del;
+	lv_obj_t *screen_init_label_progress;
+	lv_obj_t *screen_init_img_init;
+	lv_obj_t *screen_init_bar_progress;
+	lv_obj_t *screen_home;
+	bool screen_home_del;
+	lv_obj_t *screen_home_city;
+	lv_obj_t *screen_home_indoor;
+	lv_obj_t *screen_home_shidu;
+	lv_obj_t *screen_home_outdoor;
+	lv_obj_t *screen_home_shidu_show;
+	lv_obj_t *screen_home_city_show;
+	lv_obj_t *screen_home_indoor_show;
+	lv_obj_t *screen_home_outdoor_show;
+	lv_obj_t *screen_home_date;
+	lv_obj_t *screen_home_time;
+	lv_obj_t *screen_home_xingqi;
+	lv_obj_t *screen_home_tianqi_show;
+	lv_obj_t *screen_home_tianqi;
+	lv_obj_t *screen_home_label_1;
 }lv_ui;
 
 typedef void (*ui_setup_scr_t)(lv_ui * ui);
@@ -56,12 +62,14 @@ void init_keyboard(lv_ui *ui);
 extern lv_ui guider_ui;
 
 
-void setup_scr_screen(lv_ui *ui);
+void setup_scr_screen_init(lv_ui *ui);
+void setup_scr_screen_home(lv_ui *ui);
+LV_IMG_DECLARE(_pic_alpha_128x60);
 
+LV_FONT_DECLARE(lv_font_montserratMedium_10)
 LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_9)
-LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_6)
-LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_26)
-LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_13)
+LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_10)
+LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_18)
 
 
 #ifdef __cplusplus

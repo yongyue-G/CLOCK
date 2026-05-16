@@ -34,6 +34,7 @@
 ..\obj\main.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\obj\main.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\obj\main.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
+..\obj\main.o: main.h
 ..\obj\main.o: ..\SYSTEM\usart\wifi_usart.h
 ..\obj\main.o: D:\keil5\ARM\ARMCLANG\include\stdio.h
 ..\obj\main.o: ..\SYSTEM\sys\sys.h
@@ -41,12 +42,13 @@
 ..\obj\main.o: ..\INC\log.h
 ..\obj\main.o: ..\SYSTEM\timer\timer.h
 ..\obj\main.o: ..\INC\AT.h
-..\obj\main.o: ..\USER\main.h
 ..\obj\main.o: D:\keil5\ARM\ARMCLANG\include\string.h
 ..\obj\main.o: ..\INC\LCD.h
 ..\obj\main.o: ..\INC\SPI.h
 ..\obj\main.o: ..\INC\LCD_GUI.h
 ..\obj\main.o: ..\INC\DHT11.h
+..\obj\main.o: ..\INC\Init_Page.h
+..\obj\main.o: ..\INC\Homepage.h
 ..\obj\main.o: ..\lvgl\porting\lv_port_disp.h
 ..\obj\main.o: ..\lvgl\lvgl.h
 ..\obj\main.o: ..\lvgl\src/misc/lv_log.h

@@ -8,7 +8,7 @@
 #include <string.h>
 #include <stdlib.h>
 uint16_t at_rev_len=0;
-uint8_t at_rx_busy_flag=0;
+volatile uint8_t at_rx_busy_flag=0;
 USART_Config AT_usartc;
 uint8_t ATINIT=0;
 uint8_t ATECHO=0;
@@ -36,6 +36,7 @@ uint8_t AT_Init(void)
 	AT_usartc.rx_buf_size=AT_BUFF_SIZE;
     usart_init(&AT_usartc);
 	myDMA_Init(&AT_usartc);
+	
     ATINIT=1;//ÌáÔçÊÍ·Å£¬ÎªÁËAT_Wait_SendÖĞµÄAT_IS_Busy·¢ËÍAT
     log("AT Hardware Layer Initialized!");
     if(AT_Wait_Send(AT_INIT_TIMEOUT)==0)
@@ -45,9 +46,11 @@ uint8_t AT_Init(void)
         return 0;
     }
     if(ATECHO==0)//¹Ø»ØÏÔ
-        AT_Transceive("ATE1",AT_RECV_TIMEOUT);
-    else 
         AT_Transceive("ATE0",AT_RECV_TIMEOUT);
+    else 
+        AT_Transceive("ATE1",AT_RECV_TIMEOUT);
+		// Ô­×÷Õß AT.c µÚ 59 ĞĞ×óÓÒ
+
 		return 1;
 }
 /* ================= AT »ù´¡²Ù×÷ ================= */
@@ -91,7 +94,7 @@ uint8_t AT_IS_Busy(void)
 uint8_t AT_Wait_Send(uint32_t timeout)
 {
     uint32_t tick = NOW();
-    while(!AT_IS_Busy()||at_status!=AT_OK)
+    while(AT_IS_Busy()||at_status!=AT_OK)
     {
         at_status=AT_BUSY;//ÓÃÓÚ³õÊ¼»¯¸Õ¸Õ½øÈëbusyµÄÌõ¼şÅĞ¶ÏµÄ¸´Î»
         if(IS_TIMEOUT(tick,timeout))
@@ -117,7 +120,9 @@ AT_Status AT_Parse(void)//½âÎö½ÓÊÕµÄÊı¾İ
         }
     }
           DMA_ClearFlag(AT_usartc.dma_rx_stream, DMA_FLAG_TCIF2 | DMA_FLAG_HTIF2);
-    DMA_Cmd(AT_usartc.dma_rx_stream,ENABLE);
+//    DMA_Cmd(AT_usartc.dma_rx_stream,ENABLE);
+		at_status = AT_UNKNOWN;
+		// ğŸš¨ å¿…é¡»æŠŠå…¨å±€å˜é‡æ›´æ–°ä¸ºæœªçŸ¥ï¼Œå¦åˆ™å®ƒä¼šç»§æ‰¿ä¸Šä¸€æ¬¡çš„ OKï¼
     return AT_UNKNOWN;
 }
 
@@ -125,6 +130,8 @@ void AT_Recv(uint32_t timeout)//½ÓÊÕ
 {
     at_rx_busy_flag=0;
     at_rev_len=0;
+	// 1. ?? ±ØĞëÏÈÇ¿ÖÆÍ£Ö¹ DMA£¬²ÅÄÜ¶¯ËüµÄ¼Ä´æÆ÷ºÍÇå¿ÕÄÚ´æ£¡
+    DMA_Cmd(AT_usartc.dma_rx_stream, DISABLE);
     memset(at_buff, 0, AT_BUFF_SIZE);
     //´ÓĞÂ¿ªÆô±ØĞëclearËùÓĞ±êÖ¾
     DMA_ClearFlag(AT_usartc.dma_rx_stream,
@@ -141,6 +148,7 @@ void AT_Recv(uint32_t timeout)//½ÓÊÕ
     {
         if(at_rx_busy_flag==1)//esp32»Ø¸´²¢ËµÍêÁË
         {
+					printf("AT_Recv: %s\r\n", at_buff);
             at_buff[at_rev_len]='\0';
             return;
         }
@@ -154,7 +162,7 @@ AT_Status AT_Transceive(const char*cmd, uint16_t timeout)
     AT_Send(cmd);
     AT_Recv(timeout);
     AT_Parse();
-    return at_status;
+    return (at_status == AT_OK);
 }
 
 void USART1_IRQHandler(void) //½ÓÊÕÀ´×Ôµ¥Æ¬»úÍâµÄµÄĞÅÏ¢£¬Ò»µ© ESP32 ±Õ×ì£¨×ÜÏß¿ÕÏĞ£©£¬ÎÒÃÇ¾ÍÁ¢¿ÌÀ­Õ¢Í£Ö¹ DMA£¬²¢Á¢ÆğÆì×Ó¡£      
@@ -238,19 +246,33 @@ WIFI_Status AT_WIFI_Connect(char* ssid, const char* password,const char*mac)
 }
 
 /* ================= Http ================= */
-uint8_t AT_HTTP_Request(const char*url,weather_info_t* info)
+//uint8_t AT_HTTP_Request(const char*url,weather_info_t* info)
+//{
+//    if(AT_IS_Busy())
+//        return 0;
+//    //½ÚÊ¡Õ»Ö±½Ó´«ÈëÈ«¾Ö±äÁ¿£¬ÄÚ´æ¸´ÓÃ
+//    snprintf(at_buff,sizeof(at_buff),"AT+HTTPCLIENT=2,1,\"%s\",,,2", url);
+
+//    if(!AT_Transceive(at_buff,AT_HTTP_TIMEOUT))
+//        return 0;
+//    log("AT_HTTP: \r\n%s", at_buff);
+//    return prase_weather(info);
+//}
+/* ================= HTTP ================= */
+uint8_t AT_HTTP_Request(const char* url, weather_info_t* info)
 {
-    if(AT_IS_Busy())
-        return 0;
-    //½ÚÊ¡Õ»Ö±½Ó´«ÈëÈ«¾Ö±äÁ¿£¬ÄÚ´æ¸´ÓÃ
-    snprintf(at_buff,sizeof(at_buff),"AT+HTTPCLIENT=2,1,\"%s\",,,2", url);
+	if (AT_IS_Busy())
+		return 0;
 
-    if(!AT_Transceive(at_buff,AT_HTTP_TIMEOUT))
-        return 0;
-    log("AT_HTTP: \r\n%s", at_buff);
-    return prase_weather(info);
+    // ?? ĞŞ¸´µã£º×Ô¼º½¨Ò»¸ö×¨ÓÃµÄ·¢ËÍ»º³åÇø£¬¾ø¶Ô²»½èÓÃ½ÓÊÕ×¨ÓÃµÄ g_at_buf
+    char cmd_buf[256]; 
+	snprintf(cmd_buf, sizeof(cmd_buf), "AT+HTTPCLIENT=2,1,\"%s\",,,2", url);
+
+    // ·¢ËÍ¶ÀÁ¢µÄ cmd_buf£¬½ÓÊÕÊ±Çå¿ÕÖØĞ´ g_at_buf
+	if (!AT_Transceive(cmd_buf, AT_HTTP_TIMEOUT))
+		return 0;
+	return prase_weather(info);
 }
-
 
 /* ================= TIME ================= */
 uint8_t AT_Get_Time(time_t* tm)
@@ -262,14 +284,14 @@ uint8_t AT_Get_Time(time_t* tm)
 		return 0;
     //´Ë´¦²»ĞèÒªÊı¾İ½âÎö¾Í²»ÓÃAT_Transceive£¬·Ö²¼Ğ´
     AT_Send("AT+CIPSNTPTIME?");
-    AT_Transceive(at_buff,AT_RECV_TIMEOUT);
+    AT_Recv(AT_RECV_TIMEOUT);
     if(prase_time(tm)==0) return 0;
     AT_Show_Time(tm);
 		return 1;
 }
 void AT_Show_Time(time_t* tm)
 {
-    log("%04d-%02d-%02d %02d:%02d:%02d",tm->year, tm->month, tm->day, tm->hour, tm->min, tm->sec);
+	log("%04d-%02d-%02d %02d:%02d:%02d",tm->year, tm->month, tm->day, tm->hour, tm->min, tm->sec);
 }
 
 
@@ -366,7 +388,7 @@ uint8_t prase_time(time_t *t_tm)
     }
     p+=strlen("+CIPSNTPTIME:");
     //ÒòÎª day ÊÇÒ»¸öÆÕÍ¨µÄ 8 Î»Êı×Ö±äÁ¿£¨uint8_t£©¡£ÒªÏëÈÃ sscanf °ÑÎü³öÀ´µÄÊı¾İÖ±½Ó¸ÄĞ´µ½½á¹¹ÌåÄÚ²¿£¬±ØĞë¼ÓÉÏ &
-    if(scanf(p,"%15[^ ] %15[^ ] %hhd %hhd:%hhd:%hhd %hd",week,mon,
+    if(sscanf(p,"%15[^ ] %15[^ ] %hhd %hhd:%hhd:%hhd %hd",week,mon,
         &t_tm->day, &t_tm->hour, &t_tm->min, &t_tm->sec,&t_tm->year) != 7)//£¨hhd ÊÇ×¨ÃÅ¸ø 8 Î»ÕûÊı uint8_t ÓÃµÄ£©,[^ ]£ºÒ»Ö±ÍùºóÎü£¬Ö±µ½Óöµ½¿Õ¸ñÎªÖ¹£¡
     return 0;
     
@@ -403,3 +425,4 @@ uint8_t prase_time(time_t *t_tm)
 
 	return 1;
 }
+

@@ -75,15 +75,16 @@ void ui_animation(void * var, int32_t duration, int32_t delay, int32_t start_val
 void init_scr_del_flag(lv_ui *ui)
 {
 
-    ui->screen_del = true;
+    ui->screen_init_del = true;
+    ui->screen_home_del = true;
 }
 
 void setup_ui(lv_ui *ui)
 {
     init_scr_del_flag(ui);
     init_keyboard(ui);
-    setup_scr_screen(ui);
-    lv_scr_load(ui->screen);
+    setup_scr_screen_init(ui);
+    lv_scr_load(ui->screen_init);
 }
 
 void init_keyboard(lv_ui *ui)

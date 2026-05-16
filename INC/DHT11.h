@@ -2,7 +2,7 @@
 #define __DHT11_H
 
 #define GPIO_DHT11_Port GPIOA
-#define GPIO_DHT11_Pin GPIO_Pin_3
+#define GPIO_DHT11_Pin  GPIO_Pin_3
 
 #define DHT11_OUT(x) do { \
     if(x) GPIOA->BSRRL = GPIO_Pin_3; \

@@ -320,13 +320,13 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>0</wLevel>
+            <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
             <useXO>0</useXO>
-            <v6Lang>1</v6Lang>
-            <v6LangP>1</v6LangP>
+            <v6Lang>3</v6Lang>
+            <v6LangP>3</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
             <v6Lto>0</v6Lto>
@@ -336,7 +336,7 @@
               <MiscControls>--no-multibyte-chars</MiscControls>
               <Define>STM32F40_41xxx,USE_STDPERIPH_DRIVER,LV_LVGL_H_INCLUDE_SIMPLE</Define>
               <Undefine></Undefine>
-              <IncludePath>..\CORE;..\SYSTEM\sys;..\SYSTEM\usart;..\USER;..\FWLIB\inc;..\FreeRTOS\include;..\FreeRTOS\port\RVDS\ARM_CM4F;D:\keil5\ARM\ARMCLANG\include;..\SYSTEM\timer;..\INC;..\USER;..\myGui\custom;..\myGui\generated;..\myGui\generated\guider_fonts;..\lvgl;..\lvgl\porting;..\lvgl\demos\widgets;..\lvgl\src</IncludePath>
+              <IncludePath>..\CORE;..\SYSTEM\sys;..\SYSTEM\usart;..\USER;..\FWLIB\inc;..\FreeRTOS\include;..\FreeRTOS\port\RVDS\ARM_CM4F;D:\keil5\ARM\ARMCLANG\include;..\SYSTEM\timer;..\INC;..\USER;..\myGui\custom;..\myGui\generated\guider_fonts;..\lvgl;..\lvgl\porting;..\lvgl\demos\widgets;..\lvgl\src;..\myGui\generated</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1526,126 +1526,6 @@
               <FilePath>..\lvgl\src\font\lv_font_loader.c</FilePath>
             </File>
             <File>
-              <FileName>lv_font_montserrat_8.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_montserrat_8.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_10.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_montserrat_10.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_12.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_montserrat_12.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_12_subpx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_montserrat_12_subpx.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_14.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_montserrat_14.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_16.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_montserrat_16.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_18.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_montserrat_18.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_20.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_montserrat_20.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_22.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_montserrat_22.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_24.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_montserrat_24.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_26.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_montserrat_26.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_28.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_montserrat_28.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_28_compressed.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_montserrat_28_compressed.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_30.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_montserrat_30.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_32.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_montserrat_32.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_34.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_montserrat_34.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_36.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_montserrat_36.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_38.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_montserrat_38.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_40.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_montserrat_40.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_42.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_montserrat_42.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_44.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_montserrat_44.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_46.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_montserrat_46.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_48.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_montserrat_48.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_simsun_16_cjk.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\src\font\lv_font_simsun_16_cjk.c</FilePath>
-            </File>
-            <File>
               <FileName>lv_font_unscii_8.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\lvgl\src\font\lv_font_unscii_8.c</FilePath>
@@ -1776,66 +1656,6 @@
               <FilePath>..\myGui\generated\guider_customer_fonts\guider_customer_fonts.h</FilePath>
             </File>
             <File>
-              <FileName>lv_font_montserratMedium_6.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\myGui\generated\guider_fonts\lv_font_montserratMedium_6.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserratMedium_7.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\myGui\generated\guider_fonts\lv_font_montserratMedium_7.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserratMedium_9.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\myGui\generated\guider_fonts\lv_font_montserratMedium_9.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserratMedium_10.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\myGui\generated\guider_fonts\lv_font_montserratMedium_10.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserratMedium_12.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\myGui\generated\guider_fonts\lv_font_montserratMedium_12.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserratMedium_13.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\myGui\generated\guider_fonts\lv_font_montserratMedium_13.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserratMedium_26.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\myGui\generated\guider_fonts\lv_font_montserratMedium_26.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserratMedium_27.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\myGui\generated\guider_fonts\lv_font_montserratMedium_27.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_SourceHanSerifSC_Regular_6.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\myGui\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_6.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_SourceHanSerifSC_Regular_9.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\myGui\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_9.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_SourceHanSerifSC_Regular_13.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\myGui\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_13.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_SourceHanSerifSC_Regular_26.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\myGui\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_26.c</FilePath>
-            </File>
-            <File>
               <FileName>events_init.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\myGui\generated\events_init.c</FilePath>
@@ -1856,11 +1676,6 @@
               <FilePath>..\myGui\generated\gui_guider.h</FilePath>
             </File>
             <File>
-              <FileName>setup_scr_screen.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\myGui\generated\setup_scr_screen.c</FilePath>
-            </File>
-            <File>
               <FileName>widgets_init.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\myGui\generated\widgets_init.c</FilePath>
@@ -1870,325 +1685,50 @@
               <FileType>5</FileType>
               <FilePath>..\myGui\generated\widgets_init.h</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>lvgl/demos</GroupName>
-          <Files>
             <File>
-              <FileName>img_lvgl_logo.c</FileName>
+              <FileName>setup_scr_screen_home.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\widgets\assets\img_lvgl_logo.c</FilePath>
+              <FilePath>..\myGui\generated\setup_scr_screen_home.c</FilePath>
             </File>
             <File>
-              <FileName>img_clothes.c</FileName>
+              <FileName>setup_scr_screen_init.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\widgets\assets\img_clothes.c</FilePath>
+              <FilePath>..\myGui\generated\setup_scr_screen_init.c</FilePath>
             </File>
             <File>
-              <FileName>img_demo_widgets_avatar.c</FileName>
+              <FileName>_pic_alpha_128x60.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\widgets\assets\img_demo_widgets_avatar.c</FilePath>
+              <FilePath>..\myGui\generated\images\_pic_alpha_128x60.c</FilePath>
             </File>
             <File>
-              <FileName>lv_demo_widgets.c</FileName>
+              <FileName>lv_font_SourceHanSerifSC_Regular_18.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\widgets\lv_demo_widgets.c</FilePath>
+              <FilePath>..\myGui\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_18.c</FilePath>
             </File>
             <File>
-              <FileName>lv_demo_stress.c</FileName>
+              <FileName>lv_font_montserratMedium_10.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\stress\lv_demo_stress.c</FilePath>
+              <FilePath>..\myGui\generated\guider_fonts\lv_font_montserratMedium_10.c</FilePath>
             </File>
             <File>
-              <FileName>lv_demo_music.c</FileName>
+              <FileName>lv_font_SourceHanSerifSC_Regular_10.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\lv_demo_music.c</FilePath>
+              <FilePath>..\myGui\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_10.c</FilePath>
             </File>
             <File>
-              <FileName>lv_demo_music_list.c</FileName>
+              <FileName>lv_font_montserrat_14.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\lv_demo_music_list.c</FilePath>
+              <FilePath>..\lvgl\src\font\lv_font_montserrat_14.c</FilePath>
             </File>
             <File>
-              <FileName>lv_demo_music_main.c</FileName>
+              <FileName>lv_customer_font_SourceHanSerifSC_Regular_9.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\lv_demo_music_main.c</FilePath>
+              <FilePath>..\myGui\generated\guider_customer_fonts\lv_customer_font_SourceHanSerifSC_Regular_9.c</FilePath>
             </File>
             <File>
-              <FileName>img_lv_demo_music_btn_corner_large.c</FileName>
+              <FileName>lv_font_SourceHanSerifSC_Regular_9.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_btn_corner_large.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_btn_list_pause.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_btn_list_pause.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_btn_list_pause_large.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_btn_list_pause_large.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_btn_list_play.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_btn_list_play.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_btn_list_play_large.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_btn_list_play_large.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_btn_loop.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_btn_loop.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_btn_loop_large.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_btn_loop_large.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_btn_next.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_btn_next.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_btn_next_large.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_btn_next_large.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_btn_pause.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_btn_pause.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_btn_pause_large.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_btn_pause_large.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_btn_play.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_btn_play.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_btn_play_large.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_btn_play_large.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_btn_prev.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_btn_prev.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_btn_prev_large.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_btn_prev_large.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_btn_rnd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_btn_rnd.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_btn_rnd_large.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_btn_rnd_large.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_corner_left.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_corner_left.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_corner_left_large.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_corner_left_large.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_corner_right.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_corner_right.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_corner_right_large.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_corner_right_large.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_cover_1.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_cover_1.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_cover_1_large.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_cover_1_large.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_cover_2.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_cover_2.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_cover_2_large.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_cover_2_large.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_cover_3.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_cover_3.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_cover_3_large.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_cover_3_large.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_icon_1.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_icon_1.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_icon_1_large.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_icon_1_large.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_icon_2.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_icon_2.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_icon_2_large.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_icon_2_large.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_icon_3.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_icon_3.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_icon_3_large.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_icon_3_large.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_icon_4.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_icon_4.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_icon_4_large.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_icon_4_large.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_list_border.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_list_border.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_list_border_large.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_list_border_large.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_logo.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_logo.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_slider_knob.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_slider_knob.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_slider_knob_large.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_slider_knob_large.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_wave_bottom.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_wave_bottom.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_wave_bottom_large.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_wave_bottom_large.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_wave_top.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_wave_top.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_lv_demo_music_wave_top_large.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\music\assets\img_lv_demo_music_wave_top_large.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_demo_keypad_encoder.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\keypad_encoder\lv_demo_keypad_encoder.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_alpha16.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\img_benchmark_cogwheel_alpha16.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_argb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\img_benchmark_cogwheel_argb.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_chroma_keyed.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\img_benchmark_cogwheel_chroma_keyed.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_indexed16.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\img_benchmark_cogwheel_indexed16.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_rgb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\img_benchmark_cogwheel_rgb.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_rgb565a8.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\img_benchmark_cogwheel_rgb565a8.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_bechmark_montserrat_12_compr_az.c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\lv_font_bechmark_montserrat_12_compr_az.c.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_bechmark_montserrat_16_compr_az.c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\lv_font_bechmark_montserrat_16_compr_az.c.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_bechmark_montserrat_28_compr_az.c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\assets\lv_font_bechmark_montserrat_28_compr_az.c.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_demo_benchmark.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\lvgl\demos\benchmark\lv_demo_benchmark.c</FilePath>
+              <FilePath>..\myGui\generated\guider_fonts\lv_font_SourceHanSerifSC_Regular_9.c</FilePath>
             </File>
           </Files>
         </Group>

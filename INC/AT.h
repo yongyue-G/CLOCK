@@ -62,5 +62,6 @@ void extract_province_from_path(const char* path, char* province, size_t len);
 uint8_t json_next_string(char **pp,const char*key,char*out,size_t out_len);
 uint8_t prase_weather(weather_info_t *info);
 uint8_t prase_time(time_t *t_tm);
+
 #endif
 

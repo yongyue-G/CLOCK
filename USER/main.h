@@ -1,5 +1,7 @@
 #ifndef __MIAN_H
 #define __MIAN_H
+#include "stm32f4xx.h"  
+#define URL "https://api.seniverse.com/v3/weather/now.json?key=SgnM3HG8EdMC2r4ms&location=Xuzhou&language=zh-Hans&unit=c"
 typedef struct
 {
     uint8_t month;
@@ -23,7 +25,8 @@ typedef struct
     uint8_t weather;//天气代码，方便后期渲染图片和查询天气
 }weather_info_t;
 
+static uint8_t Is_Leap_Year(uint16_t year) ;
 
-
+void Local_Time_Tick(time_t *tm);
 extern weather_info_t weather_info;
 #endif

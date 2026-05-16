@@ -14,12 +14,12 @@
                 "d:\\Github Desktop Repository\\CLOCK\\SYSTEM\\timer",
                 "d:\\Github Desktop Repository\\CLOCK\\INC",
                 "d:\\Github Desktop Repository\\CLOCK\\myGui\\custom",
-                "d:\\Github Desktop Repository\\CLOCK\\myGui\\generated",
                 "d:\\Github Desktop Repository\\CLOCK\\myGui\\generated\\guider_fonts",
                 "d:\\Github Desktop Repository\\CLOCK\\lvgl",
                 "d:\\Github Desktop Repository\\CLOCK\\lvgl\\porting",
                 "d:\\Github Desktop Repository\\CLOCK\\lvgl\\demos\\widgets",
                 "d:\\Github Desktop Repository\\CLOCK\\lvgl\\src",
+                "d:\\Github Desktop Repository\\CLOCK\\myGui\\generated",
                 "D:\\keil5\\ARM\\ARMCC\\include",
                 "D:\\keil5\\ARM\\ARMCC\\include\\rw",
                 "d:\\Github Desktop Repository\\CLOCK\\FWLIB\\src",
@@ -81,13 +81,7 @@
                 "d:\\Github Desktop Repository\\CLOCK\\lvgl\\src\\widgets",
                 "d:\\Github Desktop Repository\\CLOCK\\lvgl\\src\\hal",
                 "d:\\Github Desktop Repository\\CLOCK\\myGui\\generated\\guider_customer_fonts",
-                "d:\\Github Desktop Repository\\CLOCK\\lvgl\\demos\\widgets\\assets",
-                "d:\\Github Desktop Repository\\CLOCK\\lvgl\\demos\\stress",
-                "d:\\Github Desktop Repository\\CLOCK\\lvgl\\demos\\music",
-                "d:\\Github Desktop Repository\\CLOCK\\lvgl\\demos\\music\\assets",
-                "d:\\Github Desktop Repository\\CLOCK\\lvgl\\demos\\keypad_encoder",
-                "d:\\Github Desktop Repository\\CLOCK\\lvgl\\demos\\benchmark\\assets",
-                "d:\\Github Desktop Repository\\CLOCK\\lvgl\\demos\\benchmark"
+                "d:\\Github Desktop Repository\\CLOCK\\myGui\\generated\\images"
             ],
             "defines": [
                 "STM32F40_41xxx",

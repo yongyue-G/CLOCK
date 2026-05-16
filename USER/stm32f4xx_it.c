@@ -33,6 +33,7 @@
 #include "task.h"
 
 
+
 /** @addtogroup Template_Project
   * @{
   */
@@ -141,11 +142,12 @@ void DebugMon_Handler(void)
 //  * @param  None
 //  * @retval None
 //  */
+//// 别忘了在这个文件最上面加上
 //void SysTick_Handler(void)
 //{
-// 
+//    ms_tick++;
+//    lv_tick_inc(1); // 让正牌的 LVGL 心跳在这里跳动！
 //}
-
 /******************************************************************************/
 /*                 STM32F4xx Peripherals Interrupt Handlers                   */
 /*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */

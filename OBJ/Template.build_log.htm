@@ -22,23 +22,21 @@ Dialog DLL:      TCM.DLL V1.32.0.0
  
 <h2>Project:</h2>
 D:\Github Desktop Repository\CLOCK\USER\Template.uvprojx
-Project File Date:  05/11/2026
+Project File Date:  05/15/2026
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'D:\keil5\ARM\ARMCC\Bin'
 Build target 'Template'
-compiling main.c...
-D:\keil5\ARM\ARMCLANG\include\stdio.h(20): warning:  #47-D: incompatible redefinition of macro "__ARMCLIB_VERSION"  (declared at line 12 of "D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h")
+compiling AT.c...
+D:\keil5\ARM\ARMCLANG\include\string.h(22): warning:  #47-D: incompatible redefinition of macro "__ARMCLIB_VERSION"  (declared at line 12 of "D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h")
   #define __ARMCLIB_VERSION 6070001
-D:\keil5\ARM\ARMCLANG\include\string.h(22): warning:  #47-D: incompatible redefinition of macro "__ARMCLIB_VERSION"  (declared at line 12 of "D:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h")
-  #define __ARMCLIB_VERSION 6070001
-main.c(42): warning:  #223-D: function "lv_demo_widgets" declared implicitly
-  			lv_demo_widgets();
-main.c: 3 warnings, 0 errors
+..\BSP\AT.c(165): warning:  #188-D: enumerated type mixed with another type
+      return (at_status == AT_OK);
+..\BSP\AT.c: 2 warnings, 0 errors
 linking...
-Program Size: Code=281448 RO-data=165356 RW-data=1356 ZI-data=60460  
+Program Size: Code=271632 RO-data=110324 RW-data=1096 ZI-data=60472  
 FromELF: creating hex file...
-"..\OBJ\Template.axf" - 0 Error(s), 3 Warning(s).
+"..\OBJ\Template.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -52,7 +50,7 @@ Package Vendor: Keil
   D:\keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:17
+Build Time Elapsed:  00:00:10
 </pre>
 </body>
 </html>
