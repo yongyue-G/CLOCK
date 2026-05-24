@@ -6,6 +6,24 @@
 extern lv_ui guider_ui;
 static const char *week_map[7] = {"星期一", "星期二","星期三","星期四","星期五","星期六","星期日"};//ָ�룿
 
+void u_homepage(void* pvParameters)
+{
+  EventBits_t wait_bits = EVT_GUI_INIT_DONE;
+	EventBits_t bits=xEventGroupWaitBits(g_sys_event,wait_bits,pdFALSE,//���Զ������־λ
+																		pdTRUE,//allλ
+																		portMAX_DELAY);
+    if(!guider_ui.screen_home) 
+    {
+        // ���� GUI Guider ���� screen_home ����
+        setup_scr_screen_home(&guider_ui); 
+    }
+    // ���������ǿ�ָ���ˣ���ȫ���أ�
+    lv_scr_load(guider_ui.screen_home);
+    u_refresh_homepage_lvgl(&weather_info);  
+lv_task_handler();		
+    xEventGroupSetBits(g_sys_event,EVT_HOMEPAGE_DONE);   
+    vTaskDelete(NULL);                                                       
+}
 /* -----------------------------------------------------------
  * ģ��ԭ���߷��� LVGL ���½ӿ�
  * ----------------------------------------------------------- */
@@ -44,18 +62,18 @@ void u_update_weather_lvgl(char *weather_str)
     lv_label_set_text(guider_ui.screen_home_tianqi_show, weather_str);
 }
 
-/* 更新室外环境显示 */
+/* 更新室�?�环境显�? */
 void u_update_outdoor_lvgl(float tmp)
 {
     int tmp_int = (int)tmp;                               // 提取整数部分
-    int tmp_dec = (int)(tmp * 10) % 10;                   // 提取第一位小数
-    if (tmp_dec < 0) tmp_dec = -tmp_dec;                  // 🚨 防止零下温度时小数带负号
+    int tmp_dec = (int)(tmp * 10) % 10;                   // 提取�?一位小�?
+    if (tmp_dec < 0) tmp_dec = -tmp_dec;                  // 🚨 防�?�零下温度时小数带负�?
     
     // 对应控件：screen_home_outdoor_show
     lv_label_set_text_fmt(guider_ui.screen_home_outdoor_show, "%d.%d", tmp_int, tmp_dec);
 }
 
-/* 更新室内环境显示（温湿度） */
+/* 更新室内�?境显示（温湿度） */
 void u_update_indoor_lvgl(float tmp, float humi)
 {
     // 处理室内温度
@@ -68,7 +86,7 @@ void u_update_indoor_lvgl(float tmp, float humi)
     int humi_dec = (int)(humi * 10) % 10;
     if (humi_dec < 0) humi_dec = -humi_dec; 
 
-    // 对应控件：screen_home_indoor_show 和 screen_home_shidu_show
+    // 对应控件：screen_home_indoor_show �? screen_home_shidu_show
     lv_label_set_text_fmt(guider_ui.screen_home_indoor_show, "%d.%d", tmp_int, tmp_dec);
     lv_label_set_text_fmt(guider_ui.screen_home_shidu_show, "%d.%d", humi_int, humi_dec);
 }
@@ -76,8 +94,13 @@ void u_update_indoor_lvgl(float tmp, float humi)
 /* * �������������������ִ���ת��Ϊ�����ַ���
  * ����ֵ��const char* (�����ַ���ָ�룬����ʡ�ڴ��Ұ�ȫ)
  */
-/* * 辅助函数：将天气数字代码转换为中文字符串
- * 返回值：const char* (常量字符串指针，极其省内存且安全)
+/* * 辅助函数：将天气数字代码�?�?为中文字符串
+ * 返回值：const char* (常量字�?�串指针，极其省内存且安�?)
+ */
+/**
+ * 根据心知天气API返回的天气代码，获取对应的中文字符串
+ * @param weather_code 天气代码（心知天气API�? code 字�?�的值）
+ * @return 对应的中文字符串
  */
 /**
  * 根据心知天气API返回的天气代码，获取对应的中文字符串
@@ -161,7 +184,7 @@ void u_refresh_homepage_lvgl(weather_info_t *info)
     u_update_time_lvgl(&info->time);
     u_update_date_lvgl(&info->time);
     u_update_city_lvgl(info->city);
-		const char *weather_zh = get_weather_string(info->weather); 
+	const char *weather_zh = get_weather_string(info->weather); 
     u_update_weather_lvgl((char *)weather_zh); // ǿתһ�·�ֹ�� warning
     u_update_outdoor_lvgl(info->tem_outdoor);
     u_update_indoor_lvgl(info->tem_indoor, info->humidity);

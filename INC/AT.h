@@ -8,7 +8,7 @@
 #define AT_RECV_TIMEOUT 1000
 #define AT_WIFI_TIMEOUT 3000
 #define AT_HTTP_TIMEOUT 10000
-#define IS_TIMEOUT(start, ms) ((ms) ? ((uint32_t)((NOW()) - (uint32_t)(start)) >= (uint32_t)(ms)) : 0)
+#define IS_TIMEOUT(start, ms) ((ms) ? ((uint32_t)((xTaskGetTickCount() - (uint32_t)(start))* portTICK_PERIOD_MS >= (uint32_t)(ms))) : 0)
 // #define IS_TIMEOUT(start,ms) ((ms)?((uint32_t)(NOW()-(uint32_t)start)>=(uint32_t)(ms):0))//²»³¬Ê±·µ»Ø0
 typedef enum
 {

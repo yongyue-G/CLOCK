@@ -3,7 +3,7 @@
 #include "stm32f4xx.h"                  // Device header
 
 void update_init_progress(uint8_t percent);
-void Init_page(void);
+void u_initpage(void* pvParameters);
 void boot_delay_ms(uint32_t ms);
 
 #endif

@@ -34,6 +34,16 @@
 ..\obj\timer.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\obj\timer.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\obj\timer.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
+..\obj\timer.o: ..\FreeRTOS\include\freertos.h
+..\obj\timer.o: D:\keil5\ARM\ARMCC\Bin\..\include\stddef.h
+..\obj\timer.o: ..\FreeRTOS\include\FreeRTOSConfig.h
+..\obj\timer.o: ..\FreeRTOS\include\projdefs.h
+..\obj\timer.o: ..\FreeRTOS\include\portable.h
+..\obj\timer.o: ..\FreeRTOS\include\deprecated_definitions.h
+..\obj\timer.o: ..\FreeRTOS\port\RVDS\ARM_CM4F\portmacro.h
+..\obj\timer.o: ..\FreeRTOS\include\mpu_wrappers.h
+..\obj\timer.o: ..\FreeRTOS\include\task.h
+..\obj\timer.o: ..\FreeRTOS\include\list.h
 ..\obj\timer.o: ..\SYSTEM\timer\timer.h
 ..\obj\timer.o: ..\lvgl\lvgl.h
 ..\obj\timer.o: ..\lvgl\src/misc/lv_log.h
@@ -46,7 +56,6 @@
 ..\obj\timer.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h
 ..\obj\timer.o: ..\lvgl\src/misc/lv_math.h
 ..\obj\timer.o: ..\lvgl\src/misc/lv_mem.h
-..\obj\timer.o: D:\keil5\ARM\ARMCC\Bin\..\include\stddef.h
 ..\obj\timer.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
 ..\obj\timer.o: ..\lvgl\src/misc/lv_async.h
 ..\obj\timer.o: ..\lvgl\src/misc/lv_anim_timeline.h

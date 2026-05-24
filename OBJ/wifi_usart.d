@@ -40,7 +40,6 @@
 ..\obj\wifi_usart.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h
 ..\obj\wifi_usart.o: ..\INC\AT.h
 ..\obj\wifi_usart.o: ..\USER\main.h
-..\obj\wifi_usart.o: D:\keil5\ARM\ARMCLANG\include\string.h
 ..\obj\wifi_usart.o: ..\FreeRTOS\include\FreeRTOS.h
 ..\obj\wifi_usart.o: D:\keil5\ARM\ARMCC\Bin\..\include\stddef.h
 ..\obj\wifi_usart.o: ..\FreeRTOS\include\FreeRTOSConfig.h
@@ -49,3 +48,10 @@
 ..\obj\wifi_usart.o: ..\FreeRTOS\include\deprecated_definitions.h
 ..\obj\wifi_usart.o: ..\FreeRTOS\port\RVDS\ARM_CM4F\portmacro.h
 ..\obj\wifi_usart.o: ..\FreeRTOS\include\mpu_wrappers.h
+..\obj\wifi_usart.o: ..\FreeRTOS\include\event_groups.h
+..\obj\wifi_usart.o: ..\FreeRTOS\include\timers.h
+..\obj\wifi_usart.o: ..\FreeRTOS\include\task.h
+..\obj\wifi_usart.o: ..\FreeRTOS\include\list.h
+..\obj\wifi_usart.o: ..\FreeRTOS\include\semphr.h
+..\obj\wifi_usart.o: ..\FreeRTOS\include\queue.h
+..\obj\wifi_usart.o: D:\keil5\ARM\ARMCLANG\include\string.h

@@ -150,9 +150,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>285</LineNumber>
+          <LineNumber>287</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134251694</Address>
+          <Address>134252436</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -161,14 +161,14 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>..\BSP\AT.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Template\../BSP/AT.c\285</Expression>
+          <Expression>\\Template\../BSP/AT.c\287</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>214</LineNumber>
+          <LineNumber>152</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134250530</Address>
+          <Address>134252028</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -177,14 +177,14 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>..\BSP\AT.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Template\../BSP/AT.c\214</Expression>
+          <Expression>\\Template\../BSP/AT.c\152</Expression>
         </Bp>
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>150</LineNumber>
+          <LineNumber>146</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134249938</Address>
+          <Address>134251990</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -193,14 +193,30 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>..\BSP\AT.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Template\../BSP/AT.c\150</Expression>
+          <Expression>\\Template\../BSP/AT.c\146</Expression>
         </Bp>
         <Bp>
           <Number>3</Number>
           <Type>0</Type>
+          <LineNumber>145</LineNumber>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>134251986</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\BSP\AT.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Template\../BSP/AT.c\145</Expression>
+        </Bp>
+        <Bp>
+          <Number>4</Number>
+          <Type>0</Type>
           <LineNumber>78</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134250056</Address>
+          <Address>134252112</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -212,121 +228,105 @@
           <Expression>\\Template\../BSP/AT.c\78</Expression>
         </Bp>
         <Bp>
-          <Number>4</Number>
-          <Type>0</Type>
-          <LineNumber>284</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134251688</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\BSP\AT.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Template\../BSP/AT.c\284</Expression>
-        </Bp>
-        <Bp>
           <Number>5</Number>
           <Type>0</Type>
-          <LineNumber>144</LineNumber>
+          <LineNumber>41</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134249916</Address>
+          <Address>134250784</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\BSP\AT.c</Filename>
+          <Filename>..\BSP\Init_Page.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Template\../BSP/AT.c\144</Expression>
+          <Expression>\\Template\../BSP/Init_Page.c\41</Expression>
         </Bp>
         <Bp>
           <Number>6</Number>
           <Type>0</Type>
-          <LineNumber>109</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134218660</Address>
+          <LineNumber>21</LineNumber>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>134250284</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\main.c</Filename>
+          <Filename>..\BSP\HomePage.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Template\main.c\109</Expression>
+          <Expression>\\Template\../BSP/HomePage.c\21</Expression>
         </Bp>
         <Bp>
           <Number>7</Number>
           <Type>0</Type>
-          <LineNumber>145</LineNumber>
+          <LineNumber>71</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>0</Address>
+          <Address>134250958</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\BSP\AT.c</Filename>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\BSP\Init_Page.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\Template\../BSP/Init_Page.c\71</Expression>
         </Bp>
         <Bp>
           <Number>8</Number>
           <Type>0</Type>
-          <LineNumber>146</LineNumber>
+          <LineNumber>75</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>0</Address>
+          <Address>134250978</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\BSP\AT.c</Filename>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\BSP\Init_Page.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\Template\../BSP/Init_Page.c\75</Expression>
         </Bp>
         <Bp>
           <Number>9</Number>
           <Type>0</Type>
-          <LineNumber>151</LineNumber>
+          <LineNumber>15</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>0</Address>
+          <Address>134250272</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\BSP\AT.c</Filename>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\BSP\HomePage.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\Template\../BSP/HomePage.c\15</Expression>
         </Bp>
         <Bp>
           <Number>10</Number>
           <Type>0</Type>
-          <LineNumber>152</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>0</Address>
+          <LineNumber>57</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134252054</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
+          <BreakIfRCount>1</BreakIfRCount>
           <Filename>..\BSP\AT.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\Template\../BSP/AT.c\57</Expression>
         </Bp>
         <Bp>
           <Number>11</Number>
           <Type>0</Type>
-          <LineNumber>215</LineNumber>
+          <LineNumber>35</LineNumber>
           <EnabledFlag>0</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -342,7 +342,7 @@
         <Bp>
           <Number>12</Number>
           <Type>0</Type>
-          <LineNumber>216</LineNumber>
+          <LineNumber>151</LineNumber>
           <EnabledFlag>0</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -358,7 +358,7 @@
         <Bp>
           <Number>13</Number>
           <Type>0</Type>
-          <LineNumber>286</LineNumber>
+          <LineNumber>215</LineNumber>
           <EnabledFlag>0</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -374,7 +374,7 @@
         <Bp>
           <Number>14</Number>
           <Type>0</Type>
-          <LineNumber>287</LineNumber>
+          <LineNumber>216</LineNumber>
           <EnabledFlag>0</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -484,6 +484,26 @@
           <WinNumber>1</WinNumber>
           <ItemText>at_buff[5]</ItemText>
         </Ww>
+        <Ww>
+          <count>19</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>ret</ItemText>
+        </Ww>
+        <Ww>
+          <count>20</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>ATINIT</ItemText>
+        </Ww>
+        <Ww>
+          <count>21</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>EVT_GUI_INIT_DONE</ItemText>
+        </Ww>
+        <Ww>
+          <count>22</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>g_sys_event</ItemText>
+        </Ww>
       </WatchWindow1>
       <WatchWindow2>
         <Ww>
@@ -500,6 +520,26 @@
           <count>2</count>
           <WinNumber>2</WinNumber>
           <ItemText>at_status</ItemText>
+        </Ww>
+        <Ww>
+          <count>3</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>EVT_AT_INITED</ItemText>
+        </Ww>
+        <Ww>
+          <count>4</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>sem_at</ItemText>
+        </Ww>
+        <Ww>
+          <count>5</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>AT_Seccess</ItemText>
+        </Ww>
+        <Ww>
+          <count>6</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>!(xEventGroupGetBits(g_sys_event)&amp;EVT_AT_INITED)</ItemText>
         </Ww>
       </WatchWindow2>
       <MemoryWindow1>
@@ -518,8 +558,8 @@
         <periodic>1</periodic>
         <aLwin>1</aLwin>
         <aCover>0</aCover>
-        <aSer1>0</aSer1>
-        <aSer2>0</aSer2>
+        <aSer1>1</aSer1>
+        <aSer2>1</aSer2>
         <aPa>0</aPa>
         <viewmode>1</viewmode>
         <vrSel>0</vrSel>
@@ -1111,7 +1151,7 @@
 
   <Group>
     <GroupName>FreeRTOS/port</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1143,7 +1183,7 @@
 
   <Group>
     <GroupName>FreeRTOS/src</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

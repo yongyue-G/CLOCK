@@ -27,16 +27,27 @@ Project File Date:  05/15/2026
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'D:\keil5\ARM\ARMCC\Bin'
 Build target 'Template'
-compiling AT.c...
-D:\keil5\ARM\ARMCLANG\include\string.h(22): warning:  #47-D: incompatible redefinition of macro "__ARMCLIB_VERSION"  (declared at line 12 of "D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h")
+compiling DHT11.c...
+..\BSP\DHT11.c(50): warning:  #177-D: variable "small_point"  was declared but never referenced
+  	float small_point=0;
+..\BSP\DHT11.c: 1 warning, 0 errors
+compiling HomePage.c...
+compiling Init_Page.c...
+D:\keil5\ARM\ARMCLANG\include\stdio.h(20): warning:  #47-D: incompatible redefinition of macro "__ARMCLIB_VERSION"  (declared at line 12 of "D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h")
   #define __ARMCLIB_VERSION 6070001
-..\BSP\AT.c(165): warning:  #188-D: enumerated type mixed with another type
-      return (at_status == AT_OK);
-..\BSP\AT.c: 2 warnings, 0 errors
+D:\keil5\ARM\ARMCLANG\include\string.h(22): warning:  #47-D: incompatible redefinition of macro "__ARMCLIB_VERSION"  (declared at line 22 of "D:\keil5\ARM\ARMCC\Bin\..\include\stddef.h")
+  #define __ARMCLIB_VERSION 6070001
+..\BSP\Init_Page.c: 2 warnings, 0 errors
+compiling main.c...
+D:\keil5\ARM\ARMCLANG\include\stdio.h(20): warning:  #47-D: incompatible redefinition of macro "__ARMCLIB_VERSION"  (declared at line 22 of "D:\keil5\ARM\ARMCC\Bin\..\include\stddef.h")
+  #define __ARMCLIB_VERSION 6070001
+D:\keil5\ARM\ARMCLANG\include\string.h(22): warning:  #47-D: incompatible redefinition of macro "__ARMCLIB_VERSION"  (declared at line 12 of "D:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h")
+  #define __ARMCLIB_VERSION 6070001
+main.c: 2 warnings, 0 errors
 linking...
-Program Size: Code=271632 RO-data=110324 RW-data=1096 ZI-data=60472  
+Program Size: Code=273624 RO-data=110124 RW-data=1132 ZI-data=86044  
 FromELF: creating hex file...
-"..\OBJ\Template.axf" - 0 Error(s), 2 Warning(s).
+"..\OBJ\Template.axf" - 0 Error(s), 5 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -50,7 +61,7 @@ Package Vendor: Keil
   D:\keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:10
+Build Time Elapsed:  00:00:11
 </pre>
 </body>
 </html>

@@ -36,25 +36,42 @@ void update_init_progress(uint8_t percent)
 
 
 
-void Init_page(void)
+void u_initpage(void* pvParameters)
 {
-			LCD_Init(NULL);
-			lv_init();
-			lv_port_disp_init();// 初始化lvgl显示设备
-			setup_ui(&guider_ui);           // 初始化 UI
-			events_init(&guider_ui);       // 初始化 事件
-			update_init_progress(20);
-			log_Init();
-			update_init_progress(40);
-			AT_Init();
-			update_init_progress(60);
-			DHT11_GPIO_Init();
-			update_init_progress(80);
-    if(!guider_ui.screen_home) 
+    xEventGroupSetBits(g_sys_event,EVT_WIFI_NEED_CONNECT);
+    xEventGroupSetBits(g_sys_event,EVT_TIME_READY);
+    xEventGroupSetBits(g_sys_event,EVT_WEATHER_READY);
+	  log_Init();
+    xEventGroupSetBits(g_sys_event,EVT_LOG_INITED);
+	
+    LCD_Init(NULL);
+    lv_init();
+    lv_port_disp_init();// 初始化lvgl显示设备
+    setup_ui(&guider_ui);           // 初始化 UI
+    events_init(&guider_ui);       // 初始化 事件
+    update_init_progress(30);
+		lv_task_handler();
+	
+    DHT11_GPIO_Init();
+    xEventGroupSetBits(g_sys_event,EVT_DHT11_INITED);
+    update_init_progress(60);
+		lv_task_handler();
+		if (AT_Init()) 
+		{
+			printf("AT_Init==1");
+			xEventGroupSetBits(g_sys_event, EVT_AT_INITED);
+		}
+    update_init_progress(80);
+		lv_task_handler();
+    if(AT_WIFI_Connect(ssid, password, 0)==WIFI_Connected)
     {
-        // 呼叫 GUI Guider 生成 screen_home 界面
-        setup_scr_screen_home(&guider_ui); 
+        xEventGroupClearBits(g_sys_event,EVT_WIFI_NEED_CONNECT);
+        xEventGroupSetBits(g_sys_event,EVT_AT_INITED);
     }
-    // 现在它不是空指针了，安全加载！
-    lv_scr_load(guider_ui.screen_home);
+    update_init_progress(100);
+		lv_task_handler();
+    xEventGroupSetBits(g_sys_event,EVT_GUI_INIT_DONE);
+
+    vTaskDelete(NULL);
+
 }

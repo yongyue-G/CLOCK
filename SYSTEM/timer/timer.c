@@ -1,8 +1,9 @@
 #include "stm32f4xx.h"                  // Device header
+#include "freertos.h"
+#include "task.h"
 #include "timer.h"
 #include "lvgl.h"  // 必须加上这个，才能认识 lv_tick_inc
-// 替换掉原来的 ms_tick
-volatile uint32_t ms_tick = 0; 
+
 void TIM4_Init(void)//实际是为了延时不是中断
 {
     TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
@@ -32,32 +33,29 @@ void TIM4_Init(void)//实际是为了延时不是中断
 }
 
 
-// ==========================================
-// 这是 ARM 内核自带的 SysTick 中断服务函数
-// ==========================================
+extern void xPortSysTickHandler(void);
+//systick 中断服务函数,使用 OS 时用到
 void SysTick_Handler(void)
-{
-    ms_tick++;       // 每 1ms 增加一次
-    lv_tick_inc(1);  // ?? 给 LVGL 提供完美的 1ms 心跳！
+{ 
+ if(xTaskGetSchedulerState()!=taskSCHEDULER_NOT_STARTED)//系统已经运行
+ {
+    xPortSysTickHandler();
+ }
+ lv_tick_inc(1);
 }
-
 void delay_us(uint32_t us)
 {
-    while(us)
-    {
-        uint32_t t=(us>60000)? 60000:us;
-        uint16_t start=TIM4->CNT;
-        while((uint16_t)(TIM4->CNT-start)<t);
-        us-=t;
-    }
+    // 你的 TIM4 已经配置为 84分频 (1MHz)，所以 TIM4->CNT 每过 1 微秒加 1
+    uint16_t start = TIM4->CNT; 
+    
+    // 原地死等，直到定时器走过的差值达到指定的微秒数
+    // (利用 16 位无符号数的溢出特性，哪怕定时器中途归零了也能算出正确差值)
+    while((uint16_t)(TIM4->CNT - start) < us); 
 }
 
 void delay_ms(uint32_t ms)
 {
-    while(ms--)
-    {
-        delay_us(1000);
-    }
+    vTaskDelay(pdMS_TO_TICKS(ms));
 }
 
 

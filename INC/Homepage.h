@@ -2,7 +2,7 @@
 #define __HOMEPAGE_H
 #include "main.h"
 #include "stm32f4xx.h"                  // Device header
-
+void u_homepage(void* pvParameters);
 void u_update_time_lvgl(time_t *tm);
 void u_update_date_lvgl(time_t *tm);
 void u_update_city_lvgl(char *city);

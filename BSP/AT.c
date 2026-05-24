@@ -1,4 +1,6 @@
 #include "stm32f4xx.h"                  // Device header
+#include "FreeRTOS.h"
+#include "task.h"
 #include "AT.h"
 #include "log.h"
 #include "Timer.h"
@@ -8,13 +10,12 @@
 #include <string.h>
 #include <stdlib.h>
 uint16_t at_rev_len=0;
-volatile uint8_t at_rx_busy_flag=0;
 USART_Config AT_usartc;
 uint8_t ATINIT=0;
 uint8_t ATECHO=0;
 AT_Status at_status=AT_IDLE;
 static char at_buff[AT_BUFF_SIZE+1];//ÎªÊ²Ã´ÊÇchar²»ÊÇstring
-
+xTaskHandle xATTaskHandle= NULL;
 typedef struct 
 {
    const char* str;
@@ -28,30 +29,79 @@ static const AT_StatusMap at_status_map[]={
 	{ "busy p...", AT_BUSY  },
 };
 /* ================= AT ³õÊ¼»¯ ================= */
+//uint8_t AT_Init(void)
+//{
+//    if(ATINIT==1) return 1;
+//    usart_default_config(&AT_usartc,USART1);
+//    AT_usartc.rx_buf=(uint8_t*)at_buff;//ÎªÊ²Ã´uint
+//	AT_usartc.rx_buf_size=AT_BUFF_SIZE;
+//    usart_init(&AT_usartc);
+//	myDMA_Init(&AT_usartc);
+//	
+//    ATINIT=1;//ÌáÔçÊÍ·Å£¬ÎªÁËAT_Wait_SendÖÐµÄAT_IS_Busy·¢ËÍAT
+//    log("AT Hardware Layer Initialized!");
+//    if(AT_Wait_Send(AT_INIT_TIMEOUT)==0)
+//    {
+//        ATINIT=0;
+//        LOG("AT init failed");
+//        return 0;
+//    }
+//    if(ATECHO==0)//¹Ø»ØÏÔ
+//        AT_Transceive("ATE0",AT_RECV_TIMEOUT);
+//    else 
+//        AT_Transceive("ATE1",AT_RECV_TIMEOUT);
+//		return 1;
+//}
 uint8_t AT_Init(void)
 {
     if(ATINIT==1) return 1;
-    usart_default_config(&AT_usartc,USART1);
-    AT_usartc.rx_buf=(uint8_t*)at_buff;//ÎªÊ²Ã´uint
-	AT_usartc.rx_buf_size=AT_BUFF_SIZE;
+    
+    // ==========================================
+    // ðŸ›¡ï¸? é˜²å¼¹è¡? 1ï¼šè¿›å…? RTOS ä¸´ç•ŒåŒºï¼ˆå…³é—­å¤–éƒ¨ä¸?æ–?ï¼?
+    // é˜²æ?¢åœ¨é…ç½®å¯„å­˜å™¨çš„ä¸€åŠæ—¶ï¼ŒESP32 åæ•°æ?å¼•å‘ä¸?æ–?é£Žæš´
+    // ==========================================
+    taskENTER_CRITICAL();
+
+    usart_default_config(&AT_usartc, USART1);
+    AT_usartc.rx_buf = (uint8_t*)at_buff;
+    AT_usartc.rx_buf_size = AT_BUFF_SIZE;
     usart_init(&AT_usartc);
-	myDMA_Init(&AT_usartc);
-	
-    ATINIT=1;//ÌáÔçÊÍ·Å£¬ÎªÁËAT_Wait_SendÖÐµÄAT_IS_Busy·¢ËÍAT
+    myDMA_Init(&AT_usartc);
+
+    // ==========================================
+    // ðŸ›¡ï¸? é˜²å¼¹è¡? 2ï¼šæš´åŠ›æ¸…é™? ORE (æº¢å‡º) å’? RXNE (æŽ¥æ”¶) æ ‡å¿—
+    // STM32 çš„çŽ„å­¦ï¼šå…ˆè?? SR å¯„å­˜å™?ï¼Œå†è¯? DR å¯„å­˜å™?ï¼Œå°±èƒ½æ¸…é™? ORE é”™è??ï¼?
+    // ==========================================
+    volatile uint32_t temp_clear;
+    temp_clear = USART1->SR; // è¯»çŠ¶æ€å¯„å­˜å™¨
+    temp_clear = USART1->DR; // è¯»æ•°æ?å¯„å­˜å™?
+    (void)temp_clear;        // éª—è¿‡ç¼–è¯‘å™?ï¼Œé˜²æ­¢æŠ¥ warning
+
+    // ==========================================
+    // ðŸ›¡ï¸? é˜²å¼¹è¡? 3ï¼šæ¸…ç©ºè?? ESP32 "åžƒåœ¾æ•°æ®" æ±¡æŸ“çš„è½¯ä»¶ç¼“å†²åŒº
+    // ==========================================
+    memset(at_buff, 0, AT_BUFF_SIZE);
+
+    // é€€å‡ºä¸´ç•ŒåŒºï¼Œç³»ç»Ÿå®‰å…?ï¼?
+    taskEXIT_CRITICAL();
+
+    ATINIT=1;
     log("AT Hardware Layer Initialized!");
+
+    // å‘é€? AT æŒ‡ä»¤åŽ»æŽ¢è·?
     if(AT_Wait_Send(AT_INIT_TIMEOUT)==0)
     {
         ATINIT=0;
-        LOG("AT init failed");
+        log("AT init failed");
         return 0;
     }
-    if(ATECHO==0)//¹Ø»ØÏÔ
+    
+    if(ATECHO==0)
         AT_Transceive("ATE0",AT_RECV_TIMEOUT);
     else 
         AT_Transceive("ATE1",AT_RECV_TIMEOUT);
-		// Ô­×÷Õß AT.c µÚ 59 ÐÐ×óÓÒ
-
-		return 1;
+        
+    return 1;
 }
 /* ================= AT »ù´¡²Ù×÷ ================= */
 void at_usart_send_str(const char* ch)
@@ -93,7 +143,7 @@ uint8_t AT_IS_Busy(void)
 
 uint8_t AT_Wait_Send(uint32_t timeout)
 {
-    uint32_t tick = NOW();
+    TickType_t tick = xTaskGetTickCount();
     while(AT_IS_Busy()||at_status!=AT_OK)
     {
         at_status=AT_BUSY;//ÓÃÓÚ³õÊ¼»¯¸Õ¸Õ½øÈëbusyµÄÌõ¼þÅÐ¶ÏµÄ¸´Î»
@@ -112,7 +162,6 @@ AT_Status AT_Parse(void)//½âÎö½ÓÊÕµÄÊý¾Ý
         if(strstr((char*)at_buff,at_status_map[i].str)!=NULL)
         {
             at_status=at_status_map[i].Status;
-            at_rx_busy_flag=0;
             // ÖØÐÂÇåÀí×´Ì¬£¬·ÀÖ¹Ö®Ç°ÓÐ²ÐÁô±êÖ¾
             DMA_ClearFlag(AT_usartc.dma_rx_stream, DMA_FLAG_TCIF2 | DMA_FLAG_HTIF2);
             DMA_Cmd(AT_usartc.dma_rx_stream,ENABLE);
@@ -122,13 +171,13 @@ AT_Status AT_Parse(void)//½âÎö½ÓÊÕµÄÊý¾Ý
           DMA_ClearFlag(AT_usartc.dma_rx_stream, DMA_FLAG_TCIF2 | DMA_FLAG_HTIF2);
 //    DMA_Cmd(AT_usartc.dma_rx_stream,ENABLE);
 		at_status = AT_UNKNOWN;
-		// ðŸš¨ å¿…é¡»æŠŠå…¨å±€å˜é‡æ›´æ–°ä¸ºæœªçŸ¥ï¼Œå¦åˆ™å®ƒä¼šç»§æ‰¿ä¸Šä¸€æ¬¡çš„ OKï¼
+		// ðŸš¨ å¿…é¡»æŠŠå…¨å±€å˜é‡æ›´æ–°ä¸ºæœªçŸ¥ï¼Œå¦åˆ™å®ƒä¼šç»§æ‰¿ä¸Šä¸€æ¬¡çš„ OKï¼?
     return AT_UNKNOWN;
 }
 
 void AT_Recv(uint32_t timeout)//½ÓÊÕ
 {
-    at_rx_busy_flag=0;
+    xATTaskHandle = xTaskGetCurrentTaskHandle();
     at_rev_len=0;
 	// 1. ?? ±ØÐëÏÈÇ¿ÖÆÍ£Ö¹ DMA£¬²ÅÄÜ¶¯ËüµÄ¼Ä´æÆ÷ºÍÇå¿ÕÄÚ´æ£¡
     DMA_Cmd(AT_usartc.dma_rx_stream, DISABLE);
@@ -143,18 +192,33 @@ void AT_Recv(uint32_t timeout)//½ÓÊÕ
     AT_usartc.dma_rx_stream->M0AR=(uint32_t)at_buff;
 	AT_usartc.dma_rx_stream->NDTR=AT_BUFF_SIZE;//NDTR	Number of Data Transfer Register	Ê£Óà´ý´«ÊäµÄÊý¾Ý¸öÊý
 	DMA_Cmd(AT_usartc.dma_rx_stream,ENABLE);
-    uint32_t tick = NOW();
-    while(IS_TIMEOUT(tick,timeout)==0)
+    uint32_t result = ulTaskNotifyTake(pdTRUE, pdMS_TO_TICKS(timeout));
+    if(result==pdTRUE)
     {
-        if(at_rx_busy_flag==1)//esp32»Ø¸´²¢ËµÍêÁË
-        {
-					printf("AT_Recv: %s\r\n", at_buff);
-            at_buff[at_rev_len]='\0';
-            return;
-        }
+        // ½áÊø·û°²È«¸Ç±»×Ó
+        if(at_rev_len < AT_BUFF_SIZE)
+            at_buff[at_rev_len] = '\0';
+        else
+            at_buff[AT_BUFF_SIZE] = '\0';
     }
-    log("AT Command Timeout! CMD");
+    else{
+        log("AT Command Timeout! CMD");
+        // ³¬Ê±ÁË±ðÍüÁËÓ²¼þÒ²µÃÀ­Õ¢£¬·ÀÖ¹ºóÃæÓÖÓÐ³Ùµ½µÄÊý¾Ý¹à½øÀ´
+        DMA_Cmd(AT_usartc.dma_rx_stream, DISABLE);
+    }
+
+    // while(IS_TIMEOUT(tick,timeout)==0)
+    // {
+    //     if(at_rx_busy_flag==1)//esp32»Ø¸´²¢ËµÍêÁË
+    //     {
+	// 		printf("AT_Recv: %s\r\n", at_buff);
+    //         at_buff[at_rev_len]='\0';
+    //         return;
+    //     }
+    // }
+    // log("AT Command Timeout! CMD");
 }
+
 /* ================= AT ºËÐÄ²Ù×÷ ================= */
 AT_Status AT_Transceive(const char*cmd, uint16_t timeout)
 {
@@ -167,19 +231,28 @@ AT_Status AT_Transceive(const char*cmd, uint16_t timeout)
 
 void USART1_IRQHandler(void) //½ÓÊÕÀ´×Ôµ¥Æ¬»úÍâµÄµÄÐÅÏ¢£¬Ò»µ© ESP32 ±Õ×ì£¨×ÜÏß¿ÕÏÐ£©£¬ÎÒÃÇ¾ÍÁ¢¿ÌÀ­Õ¢Í£Ö¹ DMA£¬²¢Á¢ÆðÆì×Ó¡£      
 {
+    BaseType_t xHigherPriorityTaskWoken=pdFALSE;
 	if(USART_GetITStatus(USART1,USART_IT_IDLE)==SET)//USART_IT_IDLE ²»ÊÇUSART_Flag_IDLE
 	{
 		uint32_t clear_temp=USART1->SR;
 		clear_temp=USART1->DR;
-		if(at_rx_busy_flag==0)
-		{
-			// ¼ÆËã½ÓÊÕµ½µÄ×Ö½ÚÊý = ×ÜÈÝÁ¿ - Ê£Óà¼ÆÊý
-			at_rev_len=AT_BUFF_SIZE-DMA_GetCurrDataCounter(AT_usartc.dma_rx_stream);
-			// 3. Í£Ö¹ DMA£¬·ÀÖ¹Êý¾ÝÔÚ´¦ÀíÊ±±»ÐÂÀ´µÄ¸²¸Ç
-			DMA_Cmd(AT_usartc.dma_rx_stream, DISABLE);
-			at_rx_busy_flag=1;		
-		}
+        DMA_Cmd(AT_usartc.dma_rx_stream, DISABLE);
+        at_rev_len=AT_BUFF_SIZE-DMA_GetCurrDataCounter(AT_usartc.dma_rx_stream);
+        if(xATTaskHandle!=NULL)
+        {
+            vTaskNotifyGiveFromISR(xATTaskHandle, &xHigherPriorityTaskWoken);
+            xATTaskHandle=NULL;
+        }
+		// if(at_rx_busy_flag==0)
+		// {
+		// 	// ¼ÆËã½ÓÊÕµ½µÄ×Ö½ÚÊý = ×ÜÈÝÁ¿ - Ê£Óà¼ÆÊý
+		// 	at_rev_len=AT_BUFF_SIZE-DMA_GetCurrDataCounter(AT_usartc.dma_rx_stream);
+		// 	// 3. Í£Ö¹ DMA£¬·ÀÖ¹Êý¾ÝÔÚ´¦ÀíÊ±±»ÐÂÀ´µÄ¸²¸Ç
+		// 	DMA_Cmd(AT_usartc.dma_rx_stream, DISABLE);
+		// 	at_rx_busy_flag=1;		
+		// }
 	}
+    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 }
 
 /* ================= WiFi ================= */
