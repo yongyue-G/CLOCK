@@ -70,3 +70,41 @@ void delay_ms(uint32_t ms)
 //		TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
 //	}
 //}
+
+volatile uint32_t FreeRTOSRunTimeTicks = 0; // 全局的高精度时间变量
+
+// 这个函数就是提供给 FreeRTOSConfig.h 调用的
+void ConfigureTimeForRunTimeStats(void)
+{
+    TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
+    NVIC_InitTypeDef NVIC_InitStructure;
+
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
+
+    // 假设系统时钟 168MHz，APB1 为 84MHz
+    TIM_TimeBaseStructure.TIM_Period = 50 - 1;       // 50 微秒触发一次
+    TIM_TimeBaseStructure.TIM_Prescaler = 84 - 1;    // 分频后是 1MHz (1微秒跑一次)
+    TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+    TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+    TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
+
+    TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
+
+    NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1; // 优先级可以设置高一点
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init(&NVIC_InitStructure);
+
+    TIM_Cmd(TIM3, ENABLE);
+}
+
+// TIM3 中断服务函数
+void TIM3_IRQHandler(void)
+{
+    if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)
+    {
+        FreeRTOSRunTimeTicks++; // 高频自增，提供极其精准的时间基准
+        TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
+    }
+}

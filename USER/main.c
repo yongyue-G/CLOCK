@@ -56,31 +56,50 @@ void vTaskRun_Exception(void* pvParameters);
 void vTaskRun_Time_tick(void* pvParameters);
 void vTaskRun_DHT11(void* pvParameters);
 
+// 定义一个全局变量，记录空闲任务跑了多少圈
+volatile uint32_t ulIdleCycleCount = 0;
+
+// 这是 FreeRTOS 强制要求你实现的名字，一个字母都不能错
+void vApplicationIdleHook(void)
+{
+    // CPU 只要一闲下来，就会疯狂执行这句代码
+    ulIdleCycleCount++; 
+}
+
+
 void sys_init(void *pvParameters)
 {
 	EventBits_t init_bits = xEventGroupWaitBits(g_sys_event, EVT_HOMEPAGE_DONE,
 	                                            pdFALSE,  // 不清除
 	                                            pdTRUE,   // 等待所有位
 	                                            portMAX_DELAY);
-	xTaskCreate(vTaskRun_Test, "TaskRun_Test", 128, NULL, BASE_PRIORITY+1 , NULL);
+	xTaskCreate(vTaskRun_Test, "TaskRun_Test", 512, NULL, BASE_PRIORITY+1 , NULL);
 	if(!(xEventGroupGetBits(g_sys_event)&EVT_AT_INITED))
 		xTaskCreate(vTaskRun_AT_Init, "vTaskRun_AT_Init", 512, NULL, BASE_PRIORITY + 6, &xATInitTaskHandle);
-	xTaskCreate(vTaskRun_WIFI, "vTaskRun_WIFI", 512, NULL, BASE_PRIORITY + 2, &xWIFITaskHandle);
+	xTaskCreate(vTaskRun_WIFI, "vTaskRun_WIFI", 512, NULL, BASE_PRIORITY + 2, NULL);
 	
-
-	
-    xTaskCreate(vTaskRun_Time_tick, "TimeTick", 256, NULL, BASE_PRIORITY + 7, NULL);
+	// 创建任务
+    xTaskCreate(vTaskRun_Time_tick, "TimeTick", 128, NULL, BASE_PRIORITY + 7, NULL);
     xTaskCreate(vTaskRun_Exception, "Exception", 256, NULL, BASE_PRIORITY + 7, NULL);
-	
-	 	xTaskCreate(vTaskRun_UI, "vTaskRun_UI", 1024, NULL, BASE_PRIORITY + 5, NULL);
-	
-    xTaskCreate(vTaskRun_LogRx, "LogRx", 256, NULL, BASE_PRIORITY + 4, &xLogTaskHandle);
-	
-   	xTaskCreate(vTaskRun_DHT11, "DHT11", 256, NULL, BASE_PRIORITY + 3, NULL);
-	
-    xTaskCreate(vTaskRun_AT_Get_Time, "AT_Time", 512, NULL, BASE_PRIORITY + 2, &xGetTimeTaskHandle);
-    xTaskCreate(vTaskRun_AT_HTTP, "AT_HTTP", 512, NULL, BASE_PRIORITY + 2, &xHTTPTaskHandle);
 
+	if (!(xEventGroupGetBits(g_sys_event) & EVT_AT_INITED))
+		xTaskCreate(vTaskRun_AT_Init, "AT_Init", 512, NULL, BASE_PRIORITY + 6, NULL);
+
+    xTaskCreate(vTaskRun_UI, "UI", 512, NULL, BASE_PRIORITY + 5, NULL);
+
+    xTaskCreate(vTaskRun_LogRx, "LogRx", 512, NULL, BASE_PRIORITY + 4, &xLogTaskHandle);
+
+    xTaskCreate(vTaskRun_WIFI, "WIFI", 512, NULL, BASE_PRIORITY + 3, &xWIFITaskHandle);
+   	xTaskCreate(vTaskRun_DHT11, "DHT11", 512, NULL, BASE_PRIORITY + 3, NULL);
+
+    xTaskCreate(vTaskRun_AT_Get_Time, "AT_Time", 512, NULL, BASE_PRIORITY + 2, &xGetTimeTaskHandle);
+	BaseType_t xReturn = pdFALSE;
+    xReturn=xTaskCreate(vTaskRun_AT_HTTP, "AT_HTTP", 512,NULL, BASE_PRIORITY + 2, &xHTTPTaskHandle);
+		if (xReturn != pdPASS)
+{
+    // 🚨 如果在这里打断点停住了，说明 Heap 空间不够了，HTTP 任务创建失败！
+    printf("ERROR: AT_HTTP Task Create Failed due to OOM!\r\n"); 
+}
 	
   	vTaskDelete(NULL);
 }
@@ -92,6 +111,9 @@ int main(void)
 	sem_at=xSemaphoreCreateMutex();
 	sem_ui=xSemaphoreCreateMutex();
 	g_sys_event=xEventGroupCreate();
+	
+//	log_Init();
+//		xTaskCreate(vTaskRun_Test, "TaskRun_Test", 512, NULL, BASE_PRIORITY , NULL);
 	xTaskCreate(u_initpage, "u_initpage", 1024, NULL, BASE_PRIORITY, NULL);
 
 	xTaskCreate(u_homepage, "u_homepage", 1024, NULL, BASE_PRIORITY, NULL);
@@ -149,11 +171,16 @@ void vTaskRun_AT_HTTP(void* pvParameters)
 	while(1)
 	{
 		
-		if(!xSemaphoreTake(sem_at,TIME_SEM_TAKE)) continue;
+		if(!xSemaphoreTake(sem_at,TIME_SEM_TAKE)) 
+		{
+			vTaskDelay(pdMS_TO_TICKS(10));
+			continue;
+		}
 		if(AT_WIFI_Info(ssid)!=WIFI_Connected)
 		{
 			xEventGroupSetBits(g_sys_event,EVT_WIFI_NEED_CONNECT);
 			xSemaphoreGive(sem_at);//因为后续continue回到开头需要释放锁
+			vTaskDelay(pdMS_TO_TICKS(1000));
 			continue;
 		}
 		if(AT_HTTP_Request(URL,&weather_info)==1)
@@ -165,14 +192,86 @@ void vTaskRun_AT_HTTP(void* pvParameters)
 		
 	}
 }
+//void vTaskRun_Test(void* parameters)
+//{
+//    // 定义一个足够大的数组来存放生成的表格文本
+//    // 任务越多，这个数组就需要越大，400 字节通常够用
+//    char pcWriteBuffer[400]; 
+
+//    while(1)
+//    {
+//        // 延时 5 秒打印一次报表
+//        vTaskDelay(pdMS_TO_TICKS(5000));
+
+//        printf("===========================================\r\n");
+//        printf("Task Name\tRun Time\tUsage(%%)\r\n");
+//        printf("===========================================\r\n");
+//        
+//        // 🚨 核心调用：让系统计算并填充报表
+//        vTaskGetRunTimeStats(pcWriteBuffer);
+//        
+//        // 打印出报表
+//        printf("%s\r\n", pcWriteBuffer);
+//        printf("===========================================\r\n");
+//    }
+//}
 void vTaskRun_Test(void* parameters)
 {
-	while(1)
-	{
-		printf("runing...\r\n");
-		delay_ms(1000);
-	}
+    UBaseType_t wifi_free, http_free;
+
+    while(1)
+    {
+        vTaskDelay(pdMS_TO_TICKS(5000)); // 每 5 秒巡检一次
+        if(xHTTPTaskHandle != NULL) {
+            http_free = uxTaskGetStackHighWaterMark(xHTTPTaskHandle);
+            printf("[HTTP Stack Remained]: %ld Bytes\r\n", http_free * 4);
+        }
+    }
 }
+//void vTaskRun_Test(void* parameters)
+//{
+//	whlie(1)
+//	{
+//		printf("running\r\n");
+//		delay_ms(2000);
+//	}
+//	
+//}
+//// 假设你的单片机在啥业务都不跑时，1秒钟能加到这个数（你需要先测出这个基准值）
+//// 测基准值的方法：把 sys_init 里的网络、UI等任务全注释掉，看打印出的是多少，填在这里
+//#define MAX_IDLE_COUNT_PER_SEC 3992832 
+
+//void vTaskRun_Test(void* parameters)
+//{
+//    uint32_t current_idle_count = 0;
+//    float cpu_usage = 0.0f;
+
+//    while(1)
+//    {
+//        // 1. 清零计数器
+//        ulIdleCycleCount = 0;
+
+//        // 2. 绝对延时 1000 毫秒 (让系统去跑业务任务和空闲任务)
+//        vTaskDelay(pdMS_TO_TICKS(1000));
+
+//        // 3. 抓取这 1 秒内的空闲计数值
+//        current_idle_count = ulIdleCycleCount;
+//				printf("count:%d\r\n", current_idle_count);
+////        // 4. 计算 CPU 占用率
+//        // 占用率 = (最大算力 - 剩余算力) / 最大算力 * 100%
+//        if (current_idle_count <= MAX_IDLE_COUNT_PER_SEC)
+//        {
+//            cpu_usage = (float)(MAX_IDLE_COUNT_PER_SEC - current_idle_count) / MAX_IDLE_COUNT_PER_SEC * 100.0f;
+//        }
+//        else
+//        {
+//            cpu_usage = 0.0f; // 防止异常越界
+//        }
+
+//        //5. 打印震撼的数据
+//        printf("--- CPU Usage: %.2f%% ---\r\n", cpu_usage);
+//    }
+//}
 void vTaskRun_AT_Init(void* parameters)
 {
 	TickType_t tick = xTaskGetTickCount();//累计时间
@@ -353,18 +452,35 @@ void vTaskRun_DHT11(void* pvParameters)
 {
 	while(1)
 	{
-		if(!DHT11_Read_Data())
+		uint8_t result=DHT11_Read_Data();
+		if(!result)
 		{			// 读底层硬件
         
      weather_info.tem_indoor = temperature;
      weather_info.humidity = humidity;
-			printf("temperature:%.2f:",temperature);
-			printf("humidity:%.2f:",humidity);
 		xEventGroupSetBits(g_sys_event, EVT_INDOOR_READY);
 		
 		}
 		delay_ms(3000);
 	}
-
 }
 
+// //
+
+// //两个初始化页面函数
+// //开始任务
+
+// //异常处理(优先级最高)
+// //本地时间自增(优先级最高)
+// //at初始化
+// //刷新ui(信号量、事件)
+// //log初始化
+
+// //wifi连接
+// //温湿度检测
+// //最不可控：
+// //时间获取(互斥信号量)
+// //天气获取(互斥信号量)
+
+
+// //lvgl高频率刷新

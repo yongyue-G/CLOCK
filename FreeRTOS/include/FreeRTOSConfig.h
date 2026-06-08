@@ -47,7 +47,7 @@
 #endif
 
 #define configUSE_PREEMPTION			1
-#define configUSE_IDLE_HOOK				0
+#define configUSE_IDLE_HOOK				1//��������
 #define configUSE_TICK_HOOK				0
 #define configCPU_CLOCK_HZ				( SystemCoreClock )
 #define configTICK_RATE_HZ				( ( TickType_t ) 1000 )
@@ -65,8 +65,22 @@
 #define configUSE_MALLOC_FAILED_HOOK	0
 #define configUSE_APPLICATION_TASK_TAG	0
 #define configUSE_COUNTING_SEMAPHORES	1
-#define configGENERATE_RUN_TIME_STATS	0
 
+// 1. 打开时间统计功能
+#define configGENERATE_RUN_TIME_STATS	1
+// 2. 打开字符串格式化功能（为了打印好看的表格）
+#define configUSE_STATS_FORMATTING_FUNCTIONS 1
+
+// 3. 告诉系统：初始化哪个定时器来做高精度时基？
+extern void ConfigureTimeForRunTimeStats(void);
+#define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS() ConfigureTimeForRunTimeStats()
+
+// 4. 告诉系统：去哪里获取当前的高精度时间值？
+extern volatile uint32_t FreeRTOSRunTimeTicks;
+#define portGET_RUN_TIME_COUNTER_VALUE() FreeRTOSRunTimeTicks
+
+//高水位检测
+#define INCLUDE_uxTaskGetStackHighWaterMark   1
 
 /* Software timer definitions. */
 #define configUSE_TIMERS				1

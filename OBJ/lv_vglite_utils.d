@@ -1,6 +1,0 @@
-..\obj\lv_vglite_utils.o: ..\lvgl\src\draw\nxp\vglite\lv_vglite_utils.c
-..\obj\lv_vglite_utils.o: ..\lvgl\src\draw\nxp\vglite\lv_vglite_utils.h
-..\obj\lv_vglite_utils.o: ..\lvgl\src\draw\nxp\vglite\../../../lv_conf_internal.h
-..\obj\lv_vglite_utils.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
-..\obj\lv_vglite_utils.o: ..\lvgl\src\draw\nxp\vglite\../../../lv_conf_kconfig.h
-..\obj\lv_vglite_utils.o: ..\lvgl\demos\widgets\../../lv_conf.h

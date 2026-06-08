@@ -1,4 +1,6 @@
 #include "stm32f4xx.h"                  // Device header
+#include "FreeRTOS.h"
+#include "task.h"
 #include "DHT11.h"
 #include "Timer.h"
 #include "LCD.h"
@@ -58,7 +60,7 @@ unsigned int DHT11_Read_Data(void)
 	delay_us(30);
 	
 	DHT11_Mode_IN();
-	
+	taskENTER_CRITICAL();
 	timeout=5000;
 	while((!DHT11_IN)&&(timeout>0))//等待高电平
 	{
@@ -94,7 +96,7 @@ unsigned int DHT11_Read_Data(void)
 			timeout--;
 		}
 	}
-
+	taskEXIT_CRITICAL();
 	DHT11_Mode_OUT();
 		DHT11_OUT(1);
 	
